@@ -1,0 +1,47 @@
+{%- extends 'layout.html' %}
+{% block title %}{{ username | capitalize }}{% endblock title %}
+{%- block styles -%}
+{{ super() }}
+{%- endblock styles -%}
+{%- block scripts -%}
+{{ super() }}
+{%- endblock scripts -%}
+
+{%- block navbarstart %}
+{{ super() }}
+{%- endblock navbarstart -%}
+{%- block login %}
+<a href="/logout">Logout</a>
+{%- endblock login %}
+{%- block navbarend -%}
+{{ super() }}
+{%- endblock navbarend -%}
+
+
+{%- block content %}
+<h2>All memes: </h2>
+
+{% if fail == 'True' %}  
+	<div class="alert alert-danger">
+		<strong>Failure</strong> You entered in something wrong. Please try again.
+	</div>
+{% endif %}
+
+<div class="image123">
+
+{% for meme in memes: %}
+<div class="col-sm-6 col-md-4 col-lg-2" style="text-align: center">
+    	<img src="/static/memes/{{ meme.meme_path }}" height="200" width="200" />
+	    	<p> {{ meme.meme_name }} </p>
+	    	<button class="btn btn-default" type="button">Likes: {{ meme.likes }} </button> 
+	    	<!-- <p> Likes: {{ meme.likes }} </p> -->
+	    	<p> Uploaded: {{ meme.upload_date }} </p>
+	    	<p> Tags: {% for key, value in tags.items() %}{% if key == meme.meme_name %}{{ value }}{% endif %}{% endfor %}</p>
+	    	<form action="/deleteMeme" method="POST">
+		    	{% if role == 'admin' %}<button type="submit" name="memeData" value="{{meme.meme_name}}" class="btn btn-default">Delete this meme</button>{% endif %}
+		    </form>
+    </div>
+{% endfor %}
+
+</div>
+{%- endblock content %}

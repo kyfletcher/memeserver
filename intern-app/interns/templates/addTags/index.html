@@ -1,0 +1,36 @@
+{%- extends 'layout.html' %}
+{% block title %}{{ username | capitalize }}{% endblock title %}
+{%- block styles -%}
+{{ super() }}
+{%- endblock styles -%}
+{%- block scripts -%}
+{{ super() }}
+{%- endblock scripts -%}
+
+{%- block navbarstart %}
+{{ super() }}
+{%- endblock navbarstart -%}
+{%- block login %}
+<a href="/logout">Logout</a>
+{%- endblock login %}
+{%- block navbarend -%}
+{{ super() }}
+{%- endblock navbarend -%}
+
+
+{%- block content %}
+
+    <h2>Upload new tag</h2>
+    {%- block fails -%}
+		{{ super() }}
+	{%- endblock fails -%}
+    <div style="margin-left: 10px;float: left">
+    <form action="/addTags" method=post enctype=multipart/form-data>
+    	<p> 
+	    <p style="margin-left: 10px;"><input type="text" placeholder="Tag Name" required autocomplete="off" name="tagName"/></p>
+	    <p style="margin-left: 10px;"><input type=submit value="Add" class="btn-primary"></p>
+    </form>
+    </div><br>
+    <h3 style="margin-left: 10px;"><br><br> Current tags: </h3>
+    {% for value in tags %} <li style="margin-left: 20px;">{{ value }} </li> {% endfor %}
+{%- endblock content %}

@@ -1,0 +1,75 @@
+{%- extends 'layout.html' %}
+{% block title %}Intern Login{% endblock title %}
+{%- block styles -%}
+{{ super() }}
+{%- endblock styles -%}
+{%- block scripts -%}
+{{ super() }}
+{%- endblock scripts -%}
+
+{%- block customjs -%}
+{{ super() }}
+{%- endblock customjs -%}
+
+{%- block content %}
+
+ 
+<div style="width: 500px; margin: 200px auto 0 auto;">
+	<div class="tab">
+	   <button class="tablinks" onclick="changeAction(event, 'Login')" >Login</button>
+	   <button class="tablinks" onclick="changeAction(event, 'Signup')" id="defaultOpen">Signup</button>
+	</div>
+	<div id="Login" class="tabcontent">
+	<h1>Welcome Back!</h1>
+	   <form action="/" method="post">
+	      <div class="field-wrap">
+	         <label>
+	         Email<span class="req">*</span>
+	         </label>
+	         <input type="email"required autocomplete="off" name="email"/>
+	      </div>
+	      <div class="field-wrap">
+	         <label>
+	         Password<span class="req">*</span>
+	         </label>
+	         <input type="password"required autocomplete="off" name="password"/>
+	      </div>
+	      <button type="submit" class="button button-block"/>Login</button>
+	   </form>
+	   
+	</div>
+	<div id="Signup" class="tabcontent">
+	<h1>Sign up!</h1>
+	   <form action="/signup" method="post">
+	      <div class="top-row">
+	         <div class="field-wrap">
+	            <label>
+	            Username<span class="req">*</span>
+	            </label>
+	            <input type="text" required autocomplete="off" />
+	         </div>
+	      </div>
+	      <div class="field-wrap">
+	         <label>
+	         Email Address<span class="req">*</span>
+	         </label>
+	         <input type="email"required autocomplete="off"/>
+	      </div>
+	      <div class="field-wrap">
+	         <label>
+	        Password<span class="req">*</span>
+	         </label>
+	         <input type="password"required autocomplete="off"/>
+	      </div>
+	      <button type="submit" class="button button-block"/>Get Started</button>
+	   </form>
+	</div>
+	<h3>You entered bad information.</h3>
+</div>
+
+
+<script>
+document.getElementById("defaultOpen").click();
+</script>
+
+{%- endblock content -%}

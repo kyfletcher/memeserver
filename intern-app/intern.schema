@@ -1,0 +1,5 @@
+CREATE TABLE user (uid INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, email TEXT, password TEXT, role TEXT, date_registered DATE DEFAULT(datetime('now','localtime')));
+CREATE TABLE meme (mid INTEGER PRIMARY KEY AUTOINCREMENT, meme_name TEXT, meme_path TEXT, uploaded_by INTEGER, likes INTEGER, upload_date DATE DEFAULT(date('now','localtime')));
+CREATE TABLE cookies (cid INTEGER PRIMARY KEY AUTOINCREMENT, cookieUser TEXT, cookieValue TEXT, creation_time DATE DEFAULT(strftime('%s','now')), lastAction DATE DEFAULT(strftime('%s','now')));
+CREATE TABLE tags (tagID INTEGER PRIMARY KEY AUTOINCREMENT, tagName TEXT);
+CREATE TABLE tag_join (tagID INTEGER, mid INTEGER);

@@ -1,0 +1,63 @@
+{%- extends 'layout.html' %}
+{% block title %}{{ username | capitalize }}{% endblock title %}
+{%- block styles -%}
+{{ super() }}
+{%- endblock styles -%}
+{%- block scripts -%}
+{{ super() }}
+{%- endblock scripts -%}
+{%- block navbarstart %}
+{{ super() }}
+{%- endblock navbarstart -%}
+{%- block login %}
+<a href="/logout">Logout</a>
+{%- endblock login %}
+{%- block navbarend -%}
+{{ super() }}
+{%- endblock navbarend -%}
+{%- block content %}
+{% if fail == True %}  
+<div class="alert alert-danger">
+   <strong>Failure</strong> Your meme game is not strong.
+</div>
+{% endif %}
+{% if get ==True %}
+<h2>Edit your memes: </h2>
+{% for meme in memes: %}
+<form action="/tags/{{user}}/{{meme.meme_name}}" method="post">
+   <div class="col-sm-6 col-md-4 col-lg-2" style="text-align: center">
+      <button class="btn btn-default" type="submit" name="{{ meme.meme_name }}" >
+         <img src="/static/memes/{{ meme.meme_path }}" height="200" width="200" style="margin-left: 10px" />
+         <p> {{ meme.meme_name }} </p>
+         <p> Likes: {{ meme.likes }} </p>
+         <p> Uploaded: {{ meme.upload_date }} </p>
+         <p> Tags: {% for key, value in tags.items() %}{% if key == meme.meme_name %}{{ value }} {% endif %}{% endfor %}</p>
+      </button>
+   </div>
+</form>
+{% endfor %}
+{% endif %}
+{% if post ==True %}
+<div class="col-sm-12 col-md-12 col-lg-12" style="text-align: center">
+   <img src="/static/memes/{{ path }}" height="600" width="600" style="margin-left: 10px" />
+   <p> {{ memes }} </p>
+   <p> Current Tags: {% for key, value in tags.items() %} {% for v in value  %} {{ v }} {% endfor %}{% endfor %}</p>
+</div>
+<div class="col-sm-offset-4 col-md-offset-4 col-lg-offset-4 col-sm-4 col-md-4 col-lg-4" style="text-align: center; background-color: #375a7f; ">
+   <p>Available tags: </p>
+</div>
+<form action="/tags/{{user}}" method="post">
+   <div class="col-sm-offset-4 col-md-offset-4 col-lg-offset-4 col-sm-4 col-md-4 col-lg-4" style="text-align: center; background-color: #375a7f; ">
+    {% for eachTag in allTags %}
+    	{% for key, value in tags.items() %}
+      		<input type="checkbox" name='tags' value='{{ eachTag }}'{% for v in value %}{% if v == eachTag %} checked> <span{% endif %}{% endfor %}{% if not iterated  %}>  {{ eachTag }}{% endif %}
+
+
+
+      	{% endfor %}
+    {% endfor %} <br>
+      <button class="btn btn-default btn-md col-sm-12 col-md-12 col-lg-12" type='submit' name='submit' value='{{ memes }}'>Submit	
+   </div>
+</form>
+{% endif %}
+{%- endblock content %}

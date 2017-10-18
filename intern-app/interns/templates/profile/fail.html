@@ -1,0 +1,24 @@
+{%- extends 'layout.html' %}
+{% block title %}{{ username | capitalize }}{% endblock title %}
+{%- block styles -%}
+{{ super() }}
+{%- endblock styles -%}
+{%- block scripts -%}
+{{ super() }}
+{%- endblock scripts -%}
+
+{%- block navbarstart %}
+{{ super() }}
+{%- endblock navbarstart -%}
+{%- block login %}
+<a href="/login">Login</a>
+{%- endblock login %}
+{%- block navbarend -%}
+{{ super() }}
+{%- endblock navbarend -%}
+
+{%- block content %}
+<h1>Welcome</h1>
+<h3>You can't access this page.</h3>
+
+{%- endblock content %}
